@@ -177,6 +177,13 @@ When using DNS-over-HTTPS you must set the \fB-O doh\-uri=...\fR to something
 that works with the server you're sending to.
 Also note that the value for maximum outstanding queries will be used to
 control the maximum concurrent streams within the HTTP/2 connection.
+The HTTP method can be selected with \fB-O doh\-method=GET\fR (the default)
+or \fB-O doh\-method=POST\fR.
+When the run finishes, a "DNS-over-HTTPS statistics" block reports the
+number of responses received for each HTTP status code, any responses with
+an unknown status code, and the number of responses whose content type was
+not \fBapplication/dns-message\fR (non-DNS responses are not counted as
+completed queries).
 .SH OPTIONS
 
 \fB-a \fIlocal_addr\fR

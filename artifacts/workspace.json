@@ -1,0 +1,17 @@
+{
+  "root": "/home/dev/feedback/uid29551",
+  "B": "/home/dev/feedback/uid29551",
+  "sha": "36a69661ef6744ea44eb33b2df4c5e79bf04e25b",
+  "wslDistro": "Ubuntu-26.04",
+  "source": {
+    "owner": "DNS-OARC",
+    "repo": "dnsperf",
+    "sha": "36a69661ef6744ea44eb33b2df4c5e79bf04e25b"
+  },
+  "fork": {
+    "owner": "Rrr119",
+    "repo": "dnsperf",
+    "cloneUrl": "https://github.com/Rrr119/dnsperf.git"
+  },
+  "at": "2026-11-20T07:03:27.053Z"
+}

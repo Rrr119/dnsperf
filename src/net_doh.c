@@ -90,6 +90,7 @@ typedef struct {
 struct _doh_stats {
     size_t code[500];
     size_t unknown_code;
+    size_t non_dns;
 };
 
 struct perf__doh_socket {
@@ -380,7 +381,7 @@ static ssize_t perf__doh_recv(struct perf_net_socket* sock, void* buf, size_t le
             self->stats.unknown_code++;
         }
         if (!self->http2_is_dns) {
-            // TODO: store non-dns for stats
+            self->stats.non_dns++;
             self->http2.dnsmsg_completed = false;
             self->http2.dnsmsg_at        = 0;
             self->http2_code             = 0;
@@ -390,7 +391,6 @@ static ssize_t perf__doh_recv(struct perf_net_socket* sock, void* buf, size_t le
             return -1;
         }
         if (self->http2_code < 200 || self->http2_code > 299) {
-            // TODO: store return code for stats
             self->http2.dnsmsg_completed = false;
             self->http2.dnsmsg_at        = 0;
             self->http2_code             = 0;
@@ -1045,6 +1045,7 @@ void perf_net_doh_stats_compile(struct perf_net_socket* sock)
         doh_stats.code[i] += self->stats.code[i];
     }
     doh_stats.unknown_code += self->stats.unknown_code;
+    doh_stats.non_dns += self->stats.non_dns;
 }
 
 void perf_net_doh_stats_print()
@@ -1074,6 +1075,8 @@ void perf_net_doh_stats_print()
         printf("none");
     }
     printf("\n");
+
+    printf("  Non-DNS responses:    %zu\n", doh_stats.non_dns);
 
     printf("\n");
 }
